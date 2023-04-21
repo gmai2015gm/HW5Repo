@@ -26,8 +26,7 @@ const userRouter = require('./routers/user')
 const productRouter = require('./routers/product')
 
 //Basic server setup
-const port = process.env.PORT;
-app.listen(port)
+app.listen(process.env.PORT)
 console.log(`Starting server on Port ${process.env.PORT}`)
 
 /* Express Configuration and Setup */
