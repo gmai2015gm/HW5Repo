@@ -15,14 +15,15 @@
 //Imports
 const express = require('express')
 const app = express()
+const mongoose = require('mongoose')
 const path = require('path')
 require('dotenv').config()
 
-const mongoose = require('mongoose')
-const userRouter = require('./routers/user')
-const productRouter = require('./routers/product')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
+
+const userRouter = require('./routers/user')
+const productRouter = require('./routers/product')
 
 //Basic server setup
 const port = process.env.PORT;
