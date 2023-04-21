@@ -36,8 +36,6 @@ app.set('views',path.join(__dirname,'views'))
 app.set('view engine','ejs')
 app.use(express.json())
 
-//console.log(process.env)
-
 //The mongo hookup
 mongoose.connect(process.env.MONGO_URL,{ useNewUrlParser: true, useUnifiedTopology: true},(err)=>{
     if(err)
@@ -46,6 +44,7 @@ mongoose.connect(process.env.MONGO_URL,{ useNewUrlParser: true, useUnifiedTopolo
         console.log("Connected to DB..")
 })
 
+//The Session
 app.use(session({
     secret: process.env.SESSION_KEY,
     resave: false,
