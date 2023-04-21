@@ -17,18 +17,17 @@ const express = require('express')
 const app = express()
 const path = require('path')
 require('dotenv').config()
+
 const mongoose = require('mongoose')
-const User = require('./models/user')
 const userRouter = require('./routers/user')
 const productRouter = require('./routers/product')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 
-
 //Basic server setup
 const port = process.env.PORT;
 app.listen(port)
-console.log("Starting server on Port 3000")
+console.log(`Starting server on Port ${process.env.PORT}`)
 
 /* Express Configuration and Setup */
 app.use(express.urlencoded({extended:true})); 
