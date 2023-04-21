@@ -1,10 +1,12 @@
 /**
- * INFINITY MARKETPLACE (HW4) 
+ * INFINITY MARKETPLACE (HW5) 
  * Programmed by Garrett Mai
  * 
  * Purpose:
  * Interacts with mongoDB to allow for persistent functionality 
  * of the Infinity Marketplace App we've been working on
+ * 
+ * Now has authentication
  * 
  * NOTES:
  * - As perscribed in the assignment, this is not hooked up to the front end of the site. 
@@ -20,9 +22,10 @@ const userRouter = require('./routers/user')
 const productRouter = require('./routers/product')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
+require('dotenv').config()
 
 //Basic server setup
-const port = 3000;
+const port = process.env.PORT;
 app.listen(port)
 console.log("Starting server on Port 3000")
 
@@ -33,11 +36,10 @@ app.set('views',path.join(__dirname,'views'))
 app.set('view engine','ejs')
 app.use(express.json())
 
-
+//console.log(process.env)
 
 //The mongo hookup
-const mongoURL = "mongodb+srv://gmai2015gm:test1234@theclusterforjs.txy49et.mongodb.net/infinity-market?retryWrites=true&w=majority"
-mongoose.connect(mongoURL,{ useNewUrlParser: true, useUnifiedTopology: true},(err)=>{
+mongoose.connect(process.env.MONGO_URL,{ useNewUrlParser: true, useUnifiedTopology: true},(err)=>{
     if(err)
         console.log("Could not connect to database",err)
     else
@@ -45,11 +47,11 @@ mongoose.connect(mongoURL,{ useNewUrlParser: true, useUnifiedTopology: true},(er
 })
 
 app.use(session({
-    secret: 'TopSecretKey', //process.env.SESSION_KEY,
+    secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-        mongoUrl: mongoURL
+        mongoUrl: process.env.MONGO_URL
     })
 }))
 
