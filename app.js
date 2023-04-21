@@ -16,13 +16,14 @@
 const express = require('express')
 const app = express()
 const path = require('path')
+require('dotenv').config()
 const mongoose = require('mongoose')
 const User = require('./models/user')
 const userRouter = require('./routers/user')
 const productRouter = require('./routers/product')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
-require('dotenv').config()
+
 
 //Basic server setup
 const port = process.env.PORT;
@@ -35,6 +36,7 @@ app.use(express.static(path.join(__dirname,'public')))
 app.set('views',path.join(__dirname,'views')) 
 app.set('view engine','ejs')
 app.use(express.json())
+
 
 //The mongo hookup
 mongoose.connect(process.env.MONGO_URL,{ useNewUrlParser: true, useUnifiedTopology: true},(err)=>{
